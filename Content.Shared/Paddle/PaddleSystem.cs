@@ -104,7 +104,7 @@ public sealed class PaddleSystem : EntitySystem
 }
 
 [RegisterComponent, NetworkedComponent]
-public sealed class PaddleComponent : Component
+public sealed partial class PaddleComponent : Component
 {
     public Button Pressed { get; set; } = Button.None;
     public int Score { get; set; } = 0;

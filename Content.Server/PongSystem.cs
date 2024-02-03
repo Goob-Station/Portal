@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Numerics;
 using System.Threading;
 using Content.Shared;
 using Content.Shared.Paddle;
@@ -290,7 +291,7 @@ public sealed class PongSystem : SharedPongSystem
                     // Reset ball.
                     _transform.SetCoordinates(_ball.Value, ballXform, EntityCoordinates.FromMap(_mapManager, MapCenter));
                     var ballPhysics = Comp<PhysicsComponent>(_ball.Value);
-                    var speed = ballPhysics.LinearVelocity.Normalized * BallInitialSpeed * BallScoreSpeedMultiplier;
+                    var speed = ballPhysics.LinearVelocity.Normalized() * BallInitialSpeed * BallScoreSpeedMultiplier;
                     _physics.SetLinearVelocity(_ball.Value, Vector2.Zero, body:ballPhysics);
                     Timer.Spawn(1000, () => _physics.SetLinearVelocity(_ball.Value, speed, body:ballPhysics), CancellationToken.None);
                 }

@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
@@ -73,6 +74,6 @@ public sealed class BallSystem : EntitySystem
 }
 
 [RegisterComponent]
-public sealed class BallComponent : Component
+public sealed partial class BallComponent : Component
 {
 }

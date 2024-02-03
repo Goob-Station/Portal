@@ -1,3 +1,4 @@
+using System.Numerics;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.GameObjects;
@@ -46,8 +47,8 @@ public sealed class BallController : VirtualController
             var maxSpeed = _ballSystem.BallMaximumSpeed;
 
             // Ensure ball doesn't go above the maximum speed.
-            if (physics.LinearVelocity.Length > maxSpeed)
-                PhysicsSystem.SetLinearVelocity(uid, physics.LinearVelocity.Normalized * maxSpeed, body:physics);
+            if (physics.LinearVelocity.Length() > maxSpeed)
+                PhysicsSystem.SetLinearVelocity(uid, physics.LinearVelocity.Normalized() * maxSpeed, body:physics);
         }
     }
 }
