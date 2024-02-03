@@ -23,7 +23,7 @@ public sealed class ContentCVars: CVars
     ///     Maximum speed the ball will move at.
     /// </summary>
     public static readonly CVarDef<float> BallMaximumSpeed =
-        CVarDef.Create("ball.maximum_speed", 20f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("ball.maximum_speed", 200f, CVar.REPLICATED | CVar.SERVER);
         
     // ----- PONG CVARS -----
         
