@@ -39,5 +39,6 @@ public sealed class EntryPoint : GameServer
         factory.GenerateNetIds();
 
         // DEVNOTE: This is generally where you'll be setting up the IoCManager further.
+        IoCManager.Resolve<ServerInfoManager>().Initialize();
     }
 }
