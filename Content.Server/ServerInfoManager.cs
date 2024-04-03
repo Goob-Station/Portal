@@ -37,11 +37,11 @@ public sealed class ServerInfoManager
     private static readonly (CVarDef<string> cVar, string icon, string name)[] Vars =
     {
         // @formatter:off
-        (ContentCVars.InfoLinksDiscord, "discord", "info-link-discord"),
-        (ContentCVars.InfoLinksForum,   "forum",   "info-link-forum"),
-        (ContentCVars.InfoLinksGithub,  "github",  "info-link-github"),
-        (ContentCVars.InfoLinksWebsite, "web",     "info-link-website"),
-        (ContentCVars.InfoLinksWiki,    "wiki",    "info-link-wiki")
+        (ContentCVars.InfoLinksDiscord, "discord", "Official Discord"),
+        (ContentCVars.InfoLinksForum,   "forum",   "Forum"),
+        (ContentCVars.InfoLinksGithub,  "github",  "Forgejo (Better Github)"),
+        (ContentCVars.InfoLinksWebsite, "web",     "My Website"),
+        (ContentCVars.InfoLinksWiki,    "wiki",    "Wiki")
         // @formatter:on
     };
 
