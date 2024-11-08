@@ -1,4 +1,3 @@
-using Content.Client.Overlays;
 using Content.Client.UserInterface;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
@@ -48,16 +47,11 @@ public sealed class EntryPoint : GameClient
     public override void PostInit()
     {
         base.PostInit();
-            
-        IoCManager.Resolve<InputHookupManager>().Initialize();
 
         // Pong doesn't need fancy lighting or FOV.
         IoCManager.Resolve<ILightManager>().Enabled = false;
 
         var overlayManager = IoCManager.Resolve<IOverlayManager>();
             
-        // Add the needed overlays.
-        overlayManager.AddOverlay(new CollisionOverlay());
-        overlayManager.AddOverlay(new ArenaOverlay());
     }
 }

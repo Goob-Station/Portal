@@ -13,18 +13,4 @@ public sealed partial class MainMenuHud : Control
         add => ConnectButton.OnPressed += value;
         remove => ConnectButton.OnPressed -= value;
     }
-
-    public string Username
-    {
-        get => UsernameLineEdit.Text;
-        set => UsernameLineEdit.Text = value;
-    }
-
-    public bool UsernameEditable
-    {
-        get => UsernameLineEdit.Editable;
-        set => UsernameLineEdit.Editable = value;
-    }
-
-    public string Address => AddressLineEdit.Text;
 }

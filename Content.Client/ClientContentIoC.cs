@@ -12,6 +12,5 @@ internal static class ClientContentIoC
             
         IoCManager.Register<HudManager, HudManager>();
         IoCManager.Register<StyleSheetManager, StyleSheetManager>();
-        IoCManager.Register<InputHookupManager, InputHookupManager>();
     }
 }

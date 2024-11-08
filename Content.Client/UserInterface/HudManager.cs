@@ -20,33 +20,7 @@ public sealed class HudManager
     {
         _client.RunLevelChanged += ((_, args) =>
         {
-            switch (args.NewLevel)
-            {
-                case ClientRunLevel.InGame:
-                case ClientRunLevel.Connected:
-                    _stateManager.RequestStateChange<GameState>();
-                    break;
-                    
-                case ClientRunLevel.Initialize when args.OldLevel < ClientRunLevel.Connected:
-                    _stateManager.RequestStateChange<MainMenuState>();
-                    break;
-                    
-                // When we disconnect from the server.
-                case ClientRunLevel.Error:
-                case ClientRunLevel.Initialize when args.OldLevel >= ClientRunLevel.Connected:
-                    if (_gameController.LaunchState.FromLauncher)
-                    {
-                        _stateManager.RequestStateChange<ConnectingState>();
-                        break;
-                    }
-                        
-                    _stateManager.RequestStateChange<MainMenuState>();
-                    break;
-                    
-                case ClientRunLevel.Connecting:
-                    _stateManager.RequestStateChange<ConnectingState>();
-                    break;
-            }
+            _stateManager.RequestStateChange<MainMenuState>();
         });
     }
 }
