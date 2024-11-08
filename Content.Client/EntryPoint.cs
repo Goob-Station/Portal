@@ -5,6 +5,7 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
+using Content.Client.Parallax.Managers;
 
 // DEVNOTE: Games that want to be on the hub can change their namespace prefix in the "manifest.yml" file.
 namespace Content.Client;
@@ -12,6 +13,7 @@ namespace Content.Client;
 [UsedImplicitly]
 public sealed class EntryPoint : GameClient
 {
+    [Dependency] private readonly IParallaxManager _parallaxManager = default!;
     public override void PreInit()
     { 
         IoCManager.Resolve<IClyde>().SetWindowTitle("Robust Pong");
@@ -50,7 +52,7 @@ public sealed class EntryPoint : GameClient
 
         // Pong doesn't need fancy lighting or FOV.
         IoCManager.Resolve<ILightManager>().Enabled = false;
-
+        _parallaxManager.LoadDefaultParallax();
         var overlayManager = IoCManager.Resolve<IOverlayManager>();
             
     }

@@ -30,10 +30,7 @@ public sealed class MainMenuState : State
     protected override void Startup()
     {
         _mainMenu = new MainMenuHud
-        {
-            UsernameEditable = !_gameController.LaunchState.FromLauncher,
-            Username = _cfgManager.GetCVar(CVars.PlayerName)
-        };
+        { };
 
         _mainMenu.OnConnectButtonPressed += OnConnectPressed;
         _netManager.ConnectFailed += OnConnectFailed;
