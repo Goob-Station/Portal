@@ -1,5 +1,4 @@
-# Robust Pong
-An example multiplayer project for RobustToolbox.
+# Goob Portal
 
 
 ## How to build, and run
