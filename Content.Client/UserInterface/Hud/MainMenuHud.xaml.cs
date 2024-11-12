@@ -7,12 +7,12 @@ using Robust.Shared;
 using Robust.Shared.Configuration;
 using System;
 
-namespace Content.Client.MainMenu.UI;
+namespace Content.Client.UserInterface.Hud;
 
 [GenerateTypedNameReferences]
-public sealed partial class MainMenuControl  : Control
+public sealed partial class MainMenuHud : Control
 {
-    public MainMenuControl(IResourceCache resCache, IConfigurationManager configMan)
+    public MainMenuHud(IResourceCache resCache, IConfigurationManager configMan)
     {
         RobustXamlLoader.Load(this);
 

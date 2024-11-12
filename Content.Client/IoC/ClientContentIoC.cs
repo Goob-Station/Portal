@@ -12,6 +12,7 @@ internal static class ClientContentIoC
         SharedContentIoC.Register();
             
         IoCManager.Register<IParallaxManager, ParallaxManager>();
+        IoCManager.Register<HudManager, HudManager>();
         IoCManager.Register<StyleSheetManager, StyleSheetManager>();
     }
 }

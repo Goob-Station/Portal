@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using Content.Client.MainMenu.UI;
+using Content.Client.UserInterface.Hud;
 using Robust.Client;
 using Robust.Client.State;
 using Robust.Client.ResourceManagement;
@@ -25,11 +25,11 @@ namespace Content.Client.UserInterface.States
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
         [Dependency] private readonly IResourceCache _resourceCache = default!;
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-        private MainMenuControl? _mainMenuControl;
+        private MainMenuHud _mainMenuControl = default!;
 
         protected override void Startup()
         {
-            _mainMenuControl = new MainMenuControl(_resourceCache, _configurationManager);
+            _mainMenuControl = new MainMenuHud(_resourceCache, _configurationManager);
             _userInterfaceManager.StateRoot.AddChild(_mainMenuControl);
 
             _mainMenuControl.QuitButton.OnPressed += QuitButtonPressed;
