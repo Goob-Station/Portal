@@ -16,7 +16,7 @@ public sealed class EntryPoint : GameClient
     [Dependency] private readonly IParallaxManager _parallaxManager = default!;
     public override void PreInit()
     { 
-        IoCManager.Resolve<IClyde>().SetWindowTitle("Robust Pong");
+        IoCManager.Resolve<IClyde>().SetWindowTitle("Goobstation Portal");
     }
 
     public override void Init()
@@ -24,7 +24,13 @@ public sealed class EntryPoint : GameClient
         var factory = IoCManager.Resolve<IComponentFactory>();
         var prototypes = IoCManager.Resolve<IPrototypeManager>();
 
+        ClientContentIoC.Register();
+
+        IoCManager.BuildGraph();
+        IoCManager.InjectDependencies(this);
+
         factory.DoAutoRegistrations();
+        factory.GenerateNetIds();
 
         foreach (var ignoreName in IgnoredComponents.List)
         {
@@ -36,12 +42,6 @@ public sealed class EntryPoint : GameClient
             prototypes.RegisterIgnore(ignoreName);
         }
 
-        ClientContentIoC.Register();
-
-        IoCManager.BuildGraph();
-            
-        factory.GenerateNetIds();
-            
         IoCManager.Resolve<StyleSheetManager>().Initialize();
         IoCManager.Resolve<HudManager>().Initialize();
     }
