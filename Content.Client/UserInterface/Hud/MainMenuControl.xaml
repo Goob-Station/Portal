@@ -7,19 +7,16 @@
                   VerticalAlignment="Center"
                   HorizontalExpand="True"
                   VerticalExpand="True"
-                  StyleIdentifier="mainMenuVBox"
                   SeparationOverride="3">
         <TextureRect Name="Logo"
                      Stretch="KeepCentered"/>
         <Button Name="ConnectButton"
                 Access="Public"
                 Text="Connect"
-                TextAlign="Center"
-                StyleIdentifier="mainMenu"/>
+                TextAlign="Center"/>
         <Button Name="QuitButton"
                 Access="Public"
                 Text="Quit"
-                TextAlign="Center"
-                StyleIdentifier="mainMenu"/>
+                TextAlign="Center"/>
     </BoxContainer>
 </Control>

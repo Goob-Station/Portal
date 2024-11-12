@@ -25,7 +25,7 @@ namespace Content.Client.UserInterface.States
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
         [Dependency] private readonly IResourceCache _resourceCache = default!;
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-        private MainMenuControl _mainMenuControl = default!;
+        private MainMenuControl? _mainMenuControl;
 
         protected override void Startup()
         {

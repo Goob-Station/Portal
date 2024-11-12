@@ -17,7 +17,7 @@ public sealed partial class MainMenuControl  : Control
         RobustXamlLoader.Load(this);
 
         LayoutContainer.SetAnchorPreset(this, LayoutContainer.LayoutPreset.Wide);
-
+    
         LayoutContainer.SetAnchorPreset(VBox, LayoutContainer.LayoutPreset.TopRight);
         LayoutContainer.SetMarginRight(VBox, -25);
         LayoutContainer.SetMarginTop(VBox, 30);
