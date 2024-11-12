@@ -1,58 +1,52 @@
-using System;
 using System.Text.RegularExpressions;
-using Content.Client.UserInterface.Hud;
+using Content.Client.MainMenu.UI;
 using Robust.Client;
 using Robust.Client.State;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared;
-using Robust.Shared.Configuration;
 using Robust.Shared.IoC;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 using UsernameHelpers = Robust.Shared.AuthLib.UsernameHelpers;
 
-namespace Content.Client.UserInterface.States;
-
-public sealed class MainMenuState : State
+namespace Content.Client.UserInterface.States
 {
-    [Dependency] private readonly IBaseClient _client = default!;
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IGameController _gameController = default!;
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
-        
-    // ReSharper disable once InconsistentNaming
-    private static readonly Regex IPv6Regex = new(@"\[(.*:.*:.*)](?::(\d+))?");
-        
-    private MainMenuHud? _mainMenu;
-        
-    protected override void Startup()
+    /// <summary>
+    ///     Main menu screen that is the first screen to be displayed when the game starts.
+    /// </summary>
+    // Instantiated dynamically through the StateManager, Dependencies will be resolved.
+    public sealed class MainMenuState : State
     {
-        _mainMenu = new MainMenuHud
-        { };
+        [Dependency] private readonly IGameController _gameController = default!;
+        [Dependency] private readonly IBaseClient _client = default!;
+        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+        [Dependency] private readonly IResourceCache _resourceCache = default!;
+        [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
+        private MainMenuControl _mainMenuControl = default!;
 
-        _mainMenu.OnConnectButtonPressed += OnConnectPressed;
-        _netManager.ConnectFailed += OnConnectFailed;
+        protected override void Startup()
+        {
+            _mainMenuControl = new MainMenuControl(_resourceCache, _configurationManager);
+            _userInterfaceManager.StateRoot.AddChild(_mainMenuControl);
 
-        LayoutContainer.SetAnchorAndMarginPreset(_mainMenu, LayoutContainer.LayoutPreset.Wide);
-            
-        _userInterface.StateRoot.AddChild(_mainMenu);
-    }
-        
-    protected override void Shutdown()
-    {
-        _netManager.ConnectFailed -= OnConnectFailed;
-        _mainMenu?.Dispose();
-    }
-        
-    private void OnConnectFailed(object? sender, NetConnectFailArgs e)
-    {
-        _userInterface.Popup($"Disconnected: {e.Reason}", "Disconnected");
-    }
+            _mainMenuControl.QuitButton.OnPressed += QuitButtonPressed;
+            _mainMenuControl.ConnectButton.OnPressed += ConnectButtonPressed;
+        }
 
-    private void OnConnectPressed(BaseButton.ButtonEventArgs obj)
-    {
-        _gameController.Redial("goobstation.node-offerman.simplestation.org:25510", "Connected from portal.");
+        protected override void Shutdown()
+        {
+            _mainMenuControl.Dispose();
+        }
+        private void QuitButtonPressed(BaseButton.ButtonEventArgs args)
+        {
+            _gameController.Shutdown();
+        }
+        private void ConnectButtonPressed(BaseButton.ButtonEventArgs args)
+        {
+            _gameController.Redial("goobstation.node-offerman.simplestation.org:25510", "Connected from portal.");
+        }
     }
 }
